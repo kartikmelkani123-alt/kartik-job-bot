@@ -1,4 +1,3 @@
-
 name: Kartik Job Bot
 on:
   schedule:
@@ -8,7 +7,7 @@ jobs:
   find-jobs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -18,7 +17,7 @@ jobs:
       - name: Run job bot
         run: python job_bot.py
       - name: Save results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jobs-found
           path: jobs.txt
