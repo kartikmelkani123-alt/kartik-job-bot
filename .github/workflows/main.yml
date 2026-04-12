@@ -1,1 +1,24 @@
 
+name: Kartik Job Bot
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+jobs:
+  find-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install libraries
+        run: pip install requests beautifulsoup4
+      - name: Run job bot
+        run: python job_bot.py
+      - name: Save results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jobs-found
+          path: jobs.txt
