@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
 
       - name: Run offshore job script
-        run: python kartik_offshore_sponsorship_monitor.py
+        run:  python job_bot.py
 
       - name: Upload results as artifact
         uses: actions/upload-artifact@v4
