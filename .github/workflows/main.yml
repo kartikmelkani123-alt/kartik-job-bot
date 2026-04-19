@@ -1,23 +1,28 @@
-name: Kartik Job Bot
+
+name: Kartik Offshore Job Monitor
+
 on:
-  schedule:
-    - cron: '0 */6 * * *'
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'  # Runs daily at 7:30 AM India time
+
 jobs:
   find-jobs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install libraries
-        run: pip install requests beautifulsoup4
-      - name: Run job bot
-        run: python job_bot.py
-      - name: Save results
+
+      - name: Run offshore job script
+        run: python kartik_offshore_sponsorship_monitor.py
+
+      - name: Upload results as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: jobs-found
-          path: jobs.txt
+          name: offshore-jobs-result
+          path: offshore_jobs.txt
